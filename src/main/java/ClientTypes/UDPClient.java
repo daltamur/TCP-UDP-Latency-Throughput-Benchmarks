@@ -93,7 +93,7 @@ public class UDPClient extends Client {
         }
 
         //calculate and print throughput
-        double timeInSecs = (System.nanoTime() - startTime)/1E9;
+        double timeInSecs = ((double) (System.nanoTime() - startTime))/1E9;
         double throughput = (numOfMsgs * msg.length * 8)/timeInSecs;
         System.out.println(numOfMsgs + "X" + msg.length + "B: " + throughput + " b/s");
 
