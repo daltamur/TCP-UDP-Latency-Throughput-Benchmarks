@@ -3,7 +3,6 @@ package ServerTypes;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Random;
 
 public class TCPServer extends Server {
     public TCPServer(int Port, int ackPort) {
@@ -11,7 +10,7 @@ public class TCPServer extends Server {
     }
 
     @Override
-    public void Serve() throws IOException {
+    public void Serve(){
         try {
             ServerSocket serverSocket = new ServerSocket(Port);
             Socket clientConnection = serverSocket.accept();
@@ -74,7 +73,7 @@ public class TCPServer extends Server {
         }
 
         //send message letting client know that the stop message was received
-        out.write(new String("OK").getBytes());
+        out.write("OK".getBytes());
         out.flush();
     }
 }

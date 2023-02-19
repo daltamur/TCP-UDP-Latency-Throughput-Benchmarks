@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.net.*;
 
 public class UDPServer extends Server {
-    public UDPServer(int Port, int ackPort) throws UnknownHostException {
+    public UDPServer(int Port, int ackPort){
         super(Port, ackPort);
     }
 
     @Override
-    public void Serve() throws IOException, InterruptedException {
+    public void Serve() throws IOException{
         ReceiveAndAck(new DatagramSocket(Port), new DatagramPacket(new byte[8], 8));
 
         ReceiveAndAck(new DatagramSocket(Port), new DatagramPacket(new byte[32], 32));
@@ -36,7 +36,7 @@ public class UDPServer extends Server {
                 break;
             //decrypt data
             DatagramPacket ackPacket = new DatagramPacket(XOREncryptDecrypt.EncryptDecrypt(packet.getData()), packet.getLength(), packet.getAddress(), ackPort);
-            //send back devrypted data
+            //send back decrypted data
             clientSocket.send(ackPacket);
         }
         //tell the client that you have stopped accepting data for this current iteration

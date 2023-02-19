@@ -102,9 +102,7 @@ public class UDPClient extends Client {
         serverSocket.send(packet);
         receivedPacket = new DatagramPacket(new byte[msg.length], msg.length);
         serverSocket.receive(receivedPacket);
-
         serverSocket.close();
-
     }
 
 }

@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class MainServer {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException{
         UDPServer UDPServer = new UDPServer(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
         UDPServer.Serve();
 

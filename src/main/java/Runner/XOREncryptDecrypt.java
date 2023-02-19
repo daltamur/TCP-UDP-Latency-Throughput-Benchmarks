@@ -2,8 +2,6 @@ package Runner;
 
 import com.google.common.primitives.Longs;
 
-import java.nio.charset.StandardCharsets;
-
 public class XOREncryptDecrypt {
     final static Long KEY = 1234312634L;
 
