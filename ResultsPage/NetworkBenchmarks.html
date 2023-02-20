@@ -38,8 +38,36 @@
 
 <h2>Experience</h2>
 <p>
-
+    I've worked with TCP in the past, so setting up the server and client for the benchmarks with this protocol was relatively easy. However, with UDP, it was an
+    entirely different experience since I never used it before. With UDP connections not requiring an initial connection, I had to rethink how I was setting
+    up my server and client so that the server was always properly synchronized to be listening for data from the client and vice versa. Once I was able to do
+    this though, the UDP server and client were relatively easy to implement and I was able to develop it quicker than I did the TCP client and server
+    since a lot of the code needed when using a TCP protocol carried over when using a UDP protocol and I just had to make some necessary changes
+    to accommodate a connectionless protocol.
 </p>
+
+<p>
+    The only other problem I ran into was with the Oswego residence hall network's firewalls. When setting up the UDP server and client, I was running into an issue
+    where I was attempting to use my laptop as a server and Moxie as a client and found that my laptop can only receive datagram packets <i>if</i> it initially sends
+    one out to Moxie. After some research, I found <a href="https://stackoverflow.com/questions/14471438/java-datagramsocketudp-socket-only-receives-when-previously-have-sent-a-packet">this</a> Stack Overflow
+    question where it would appear that initially sending out a packet opens the firewall and allows for data to be sent through it for a period of time.
+    At this point, I just made sure to only use my laptop as a client and use Moxie as a server for my benchmarks and the problem was resolved so that
+    I did not need to have the server send an initial message to the client so that it could start receiving messages.
+</p>
+
+<h2>Demo Photos</h2>
+<table>
+    <th>Client Running on My Laptop</th>
+    <th>Server running on Moxie</th>
+    <tr>
+        <td>
+            <img src="graphs/clientExample.png">
+        </td>
+        <td>
+            <img src="graphs/moxieExample.png">
+        </td>
+    </tr>
+</table>
 
 <h2>Latency Graphs</h2>
 <table>
@@ -47,30 +75,30 @@
     <th>UDP</th>
     <tr>
         <td>
-            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/TCP Latency Laptop to Moxie.png">
+            <img src="graphs/TCP Latency Laptop to Moxie.png">
         </td>
         <td>
-            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/UDP Latency Laptop to Moxie.png">
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/TCP Latency Pi to Moxie.png">
-        </td>
-
-        <td>
-            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/UDP Latency Pi to Moxie.png">
+            <img src="graphs/UDP Latency Laptop to Moxie.png">
         </td>
     </tr>
 
     <tr>
         <td>
-            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/TCP Latency Rho to Moxie.png">
+            <img src="graphs/TCP Latency Pi to Moxie.png">
         </td>
 
         <td>
-            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/UDP Latency Rho to Moxie.png">
+            <img src="graphs/UDP Latency Pi to Moxie.png">
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <img src="graphs/TCP Latency Rho to Moxie.png">
+        </td>
+
+        <td>
+            <img src="graphs/UDP Latency Rho to Moxie.png">
         </td>
     </tr>
 </table>
@@ -81,30 +109,30 @@
     <th>UDP</th>
     <tr>
         <td>
-            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/TCP Throughput Laptop to Moxie.png">
+            <img src="graphs/TCP Throughput Laptop to Moxie.png">
         </td>
         <td>
-            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/UDP Throughput Laptop to Moxie.png">
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/TCP Throughput Pi to Moxie.png">
-        </td>
-
-        <td>
-            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/UDP Throughput Pi to Moxie.png">
+            <img src="graphs/UDP Throughput Laptop to Moxie.png">
         </td>
     </tr>
 
     <tr>
         <td>
-            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/TCP Throughput Rho to Moxie.png">
+            <img src="graphs/TCP Throughput Pi to Moxie.png">
         </td>
 
         <td>
-            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/UDP Throughput Rho to Moxie.png">
+            <img src="graphs/UDP Throughput Pi to Moxie.png">
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <img src="graphs/TCP Throughput Rho to Moxie.png">
+        </td>
+
+        <td>
+            <img src="graphs/UDP Throughput Rho to Moxie.png">
         </td>
     </tr>
 </table>
