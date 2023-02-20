@@ -53,9 +53,9 @@ public class UDPClient extends Client {
             serverSocket.send(new DatagramPacket(Runner.XOREncryptDecrypt.EncryptDecrypt(msg), msg.length, ip, Port));
             //receive the server's attempt to decrypt the data
             serverSocket.receive(receivedPacket);
-            if(!new String(msg).equals(new String(receivedPacket.getData(), 0 , receivedPacket.getLength()))){
+            if(!new String(msg).equals(new String(receivedPacket.getData(), 0 , receivedPacket.getLength())))
                 System.out.println("Error: Messages Do Not Match.");
-            }
+
             //add the total time this process took to the total time
             totalTime+=(System.nanoTime()-curTime)/1E9;
         }
@@ -87,9 +87,8 @@ public class UDPClient extends Client {
             serverSocket.receive(receivedPacket);
             System.arraycopy(receivedPacket.getData(), 0, receivedMsgSubset, 0, 8);
             //see if the decrypted message matches up with the first 8 bits of the original message
-            if(!new String(receivedMsgSubset).equals(new String(receivedPacket.getData()))){
+            if(!new String(receivedMsgSubset).equals(new String(receivedPacket.getData())))
                 System.out.println("Error: Messages Do Not Match.");
-            }
         }
 
         //calculate and print throughput
