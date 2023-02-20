@@ -5,6 +5,110 @@
     <title>UDP & TCP Benchmarks</title>
 </head>
 <body>
+<h1>UDP & TCP Latency/Throughput Benchmarking</h1>
+<h2>Dominic Altamura</h2>
+<h1><a href="https://github.com/daltamur/TCP-UDP-Latency-Throughput-Benchmarks">Access the GitHub Repository Here</a></h1>
+<h2>Project Design</h2>
+<p>
+    To measure latency and throughput I designed the project such that one must run the server that will accept data and send back a response.
+    The server is designed to continually listen until it is told to stop at the end of benchmark. Once it receives a message from the
+    client that the benchmark is over, it begins listening for data that is specific for the next benchmark until all benchmarks have finished.
+</p>
+
+<p>
+    The client are designed to first test the latency and throughput using UDP and then TCP. Latency is tested by generating a random byte array
+    and encrypting its byte values with an XOR cipher. This value is then sent over to the server which decrypts the value with the same cipher
+    and sending the decrypted packet back as an acknowledgement packet and the client then verifies that the decrypted value sent back by the server matches the
+    original byte array. The time this process takes is recorded and the average time of performing this task 5000 times is recorded as the average latency.
+    After the task is performed 5000 times, the client sends a message to the server that is equal to the string value of "STOP"
+    so that the server will stop listening for data from the current benchmark. The latency is measured in seconds.
+    This test is first done with messages of size 8 bytes, 32 bytes, 512 bytes, and 1024 bytes.
+</p>
+
+<p>
+    Throughput is tested by sending x amount of packets that are of size y to the server. A byte array with random values is again generated and
+    the client encrypts the value of the array with an XOR cipher. This is sent to the server that decrypts the byte array
+    and sends back the first 8 bytes of the decrypted value since this assignment limits throughput benchmarks to only use
+    8 byte acknowledgement packets. The client receives these 8 bytes and verifies that the first 8 bytes of the original
+    byte array are equal to the acknowledgement packet. The time it takes for this task to perform this task x times is
+    recorded and the throughput is calculated with the equation throughput = (numberOfPackets*packetSize*8)/(totalTime).
+    Latency is measured as bits per second. The test is fdone with 1024 1024 byte messages, 2045 512 byte messages, and 8192 128 byte messages.
+</p>
+
+
+<h2>Experience</h2>
+<p>
+
+</p>
+
+<h2>Latency Graphs</h2>
+<table>
+    <th>TCP</th>
+    <th>UDP</th>
+    <tr>
+        <td>
+            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/TCP Latency Laptop to Moxie.png">
+        </td>
+        <td>
+            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/UDP Latency Laptop to Moxie.png">
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/TCP Latency Pi to Moxie.png">
+        </td>
+
+        <td>
+            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/UDP Latency Pi to Moxie.png">
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/TCP Latency Rho to Moxie.png">
+        </td>
+
+        <td>
+            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/UDP Latency Rho to Moxie.png">
+        </td>
+    </tr>
+</table>
+
+<h2>Throughput Graphs</h2>
+<table>
+    <th>TCP</th>
+    <th>UDP</th>
+    <tr>
+        <td>
+            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/TCP Throughput Laptop to Moxie.png">
+        </td>
+        <td>
+            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/UDP Throughput Laptop to Moxie.png">
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/TCP Throughput Pi to Moxie.png">
+        </td>
+
+        <td>
+            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/UDP Throughput Pi to Moxie.png">
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/TCP Throughput Rho to Moxie.png">
+        </td>
+
+        <td>
+            <img src="/home/dominic/IdeaProjects/Networking-Projects/UDP-TCP-Comparison/ResultsPage/graphs/UDP Throughput Rho to Moxie.png">
+        </td>
+    </tr>
+</table>
+
 
 </body>
 </html>
