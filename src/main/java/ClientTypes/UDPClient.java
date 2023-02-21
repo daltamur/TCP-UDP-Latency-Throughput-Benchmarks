@@ -49,7 +49,7 @@ public class UDPClient extends Client {
             //begin timer
             long curTime = System.nanoTime();
 
-            //encrypt data
+            //encrypt and send the data
             serverSocket.send(new DatagramPacket(Runner.XOREncryptDecrypt.EncryptDecrypt(msg), msg.length, ip, Port));
             //receive the server's attempt to decrypt the data
             serverSocket.receive(receivedPacket);
@@ -57,7 +57,7 @@ public class UDPClient extends Client {
                 System.out.println("Error: Messages Do Not Match.");
 
             //add the total time this process took to the total time
-            totalTime+=(System.nanoTime()-curTime)/1E9;
+            totalTime+=(System.nanoTime()-curTime)/1E6;
         }
 
         //tell server to stop taking data
@@ -67,7 +67,7 @@ public class UDPClient extends Client {
         receivedPacket = new DatagramPacket(new byte[msg.length], msg.length);
         serverSocket.receive(receivedPacket);
 
-        System.out.println(totalTime/1000.0 + " seconds for " + msg.length + " bytes");
+        System.out.println(totalTime/1000.0 + " milliseconds for " + msg.length + " bytes");
         serverSocket.close();
     }
 
@@ -93,8 +93,8 @@ public class UDPClient extends Client {
 
         //calculate and print throughput
         double timeInSecs = ((double) (System.nanoTime() - startTime))/1E9;
-        double throughput = (numOfMsgs * msg.length * 8)/timeInSecs;
-        System.out.println(numOfMsgs + "X" + msg.length + "B: " + throughput + " b/s");
+        double throughput = ((numOfMsgs * msg.length * 8)/1E6)/timeInSecs;
+        System.out.println(numOfMsgs + "X" + msg.length + "B: " + throughput + " Mb/s");
 
         //Tell the server to stop accepting messages
         packet = new DatagramPacket("STOP".getBytes(), "STOP".getBytes().length, ip, Port);

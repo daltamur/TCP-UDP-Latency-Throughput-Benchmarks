@@ -60,7 +60,7 @@ public class TCPClient extends Client {
                 System.out.println("Error. Messages do not match");
             }
             //add the time this process took to the total time
-            totalTime+=(System.nanoTime()-curTime)/1E9;
+            totalTime+=(System.nanoTime()-curTime)/1E6;
             out.flush();
         }
         //tell the server to stop taking in data
@@ -68,7 +68,7 @@ public class TCPClient extends Client {
         byte[] ackMsg = new byte[msg.length];
         in.read(ackMsg);
         //print out the average latency
-        System.out.println(totalTime/1000.0 + " seconds for " + msg.length + " bytes");
+        System.out.println(totalTime/1000.0 + " milliseconds for " + msg.length + " bytes");
         out.flush();
 
     }
@@ -92,8 +92,8 @@ public class TCPClient extends Client {
 
         //calculate and print throughput
         double timeInSecs = ((double) (System.nanoTime() - startTime))/1E9;
-        double throughput = (numOfMsgs * msg.length * 8)/timeInSecs;
-        System.out.println(numOfMsgs + "X" + msg.length + "B: " + throughput + " b/s");
+        double throughput = ((numOfMsgs * msg.length * 8)/1E6)/timeInSecs;
+        System.out.println(numOfMsgs + "X" + msg.length + "B: " + throughput + " Mb/s");
 
         //tell server to stop waiting for messages
         out.write("STOP".getBytes());
